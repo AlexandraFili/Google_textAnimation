@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <title>Making For Everyone</title>
+</head>
+<body>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/768px-Google_%22G%22_Logo.svg.png"
+  />
+  <h1><span class="text blue">Build</span> for everyone</h1>
+
+  
+
+
+
+  <script type="text/javascript">
+  const words = ["Build", "Create", "Design", "Code"],
+  colors = ["blue", "green", "yellow", "red"],
+  text = document.querySelector(".text");
+
+// Generator (iterate from 0-3)
+function* generator() {
+  var index = 0;
+  while (true) {
+    yield index++;
+
+    if (index > 3) {
+      index = 0;
+    }
+  }
+}
+
+// Printing effect
+function printChar(word) {
+  let i = 0;
+  text.innerHTML = "";
+  text.classList.add(colors[words.indexOf(word)]);
+  let id = setInterval(() => {
+    if (i >= word.length) {
+      deleteChar();
+      clearInterval(id);
+    } else {
+      text.innerHTML += word[i];
+      i++;
+    }
+  }, 700);
+}
+
+// Deleting effect
+function deleteChar() {
+  let word = text.innerHTML;
+  let i = word.length - 1;
+  let id = setInterval(() => {
+    if (i >= 0) {
+      text.innerHTML = text.innerHTML.substring(0, text.innerHTML.length - 1);
+      i--;
+    } else {
+      text.classList.remove(colors[words.indexOf(word)]);
+      printChar(words[gen.next().value]);
+      clearInterval(id);
+    }
+  }, 100);
+}
+
+// Initializing generator
+let gen = generator();
+printChar(words[gen.next().value]);
+ </script>
+
+</body>
+</html>
